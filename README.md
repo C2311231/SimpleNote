@@ -1,6 +1,6 @@
 # Simple Note
 
-A small Flask notes application with user authentication and note creation that I found in a old backup.
+A small Flask notes application with user authentication and note creation that I recovered an old backup.
 
 ## Features
 
@@ -45,7 +45,21 @@ A small Flask notes application with user authentication and note creation that 
 
 ## Running the app
 
-Start the Flask application:
+Before starting the app, set a secure `SECRET_KEY` in your environment:
+
+### Linux/macos
+
+```bash
+export SECRET_KEY="$(python -c 'import secrets; print(secrets.token_urlsafe(32))')"
+```
+
+### Windows
+
+```powershell
+$env:SECRET_KEY = python -c "import secrets; print(secrets.token_urlsafe(32))"
+```
+
+Then start the Flask application:
 
 ```bash
 python main.py
@@ -59,9 +73,10 @@ The app uses SQLite and creates `instance/database.db` automatically on first ru
 
 ## Notes
 
-- The app currently uses a hard-coded `SECRET_KEY` in `app/__init__.py`. For public deployments please, change this to a secure randomly generated secret key.
+- The app reads `SECRET_KEY` from the `SECRET_KEY` environment variable in `app/__init__.py`.
+- If `SECRET_KEY` is not set, the app falls back to a placeholder value, which is not safe for production.
+- For public deployments, always generate and use a strong random secret key.
 
 ## License
 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
-
