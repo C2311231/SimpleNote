@@ -14,6 +14,10 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
 
+        if not email or not password:
+            flash('Please fill out all fields.', category='error')
+            return render_template("login.html", user=current_user)
+
         user = User.query.filter_by(email=email).first()
         if user:
             if check_password_hash(user.password, password):
@@ -42,6 +46,10 @@ def sign_up():
         first_name = request.form.get('firstName')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
+
+        if not email or not first_name or not password1 or not password2:
+            flash('Please fill out all fields.', category='error')
+            return render_template("sign_up.html", user=current_user)
 
         user = User.query.filter_by(email=email).first()
         if user:
