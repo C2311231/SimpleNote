@@ -62,3 +62,6 @@ The app uses SQLite and creates `instance/database.db` automatically on first ru
 - The app currently uses a hard-coded `SECRET_KEY` in `app/__init__.py`. For public deployments please, change this to a secure randomly generated secret key.
 
 ## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
